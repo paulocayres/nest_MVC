@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Buddy</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+    integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+  <div class="jumbotron jumbotron-fluid">
+    <div id="faixa" class="container-fluid">
+      <div class="row align-items-center">
+        <div class="col-xs-12 col-sm-4 col-md-4 col-lg-3 col-xl-3">
+          <img src="buddy_icone.png" alt="" height="150px">
+        </div>
+        <div class="col-xs-12 col-sm-8 col-md-8 col-lg-9 col-xl-9">
+          <h1>Fluid jumbotron</h1>
+          <p>This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <form id="dummyForm" method="post">
+
+    <div class="form-group">
+      <label for="nome">
+        <h5>Dummy:</h5>
+      </label>
+
+      <input type="text" required class="form-control form-control-lg" id="dummy" name="dummy"
+        placeholder="Digite o texto">
+
+    </div>
+
+
+
+    <div class="row">
+
+      <div class="col-6 align-items-center">
+
+        <button id="submit" type="submit" type="button" class="btn btn-primary btn-center">Cadastrar</button>
+
+      </div>
+
+    </div>
+
+  </form>
+
+<p>{{ dummy }}</p>
+
+</body>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+  integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+
+</html>
