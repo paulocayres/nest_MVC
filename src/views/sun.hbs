@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+{{>head}}
+
+
+
+<div class="container">
+
+    <form id="sunForm" method="post">
+
+        <div class="form-group">
+
+
+
+            <label for="data">
+                <h5>Data/Hora:</h5>
+            </label>
+
+            <input type="datetime" required class="form-control form-control-lg" id="data" name="data" size="50"
+                placeholder="Digite a data e hora no formato: 2020-02-15T05:11:40.335Z">
+
+            <br>
+
+            <label for="latitude">
+                <h5>Latitude:</h5>
+            </label>
+            <input type="text" required class="form-control form-control-lg" id="latitude" name="latitude"
+                value={{latitude}} placeholder="Digite a latitude">
+            <br>
+
+            <label for="logitude">
+                <h5>Longitude:</h5>
+            </label>
+            <input type="text" required class="form-control form-control-lg" id="longitude" name="longitude"
+                value={{longitude}} placeholder="Digite a longitude">
+
+            <label for="sombra.altura">
+                <h5>Altura do obstáculo:</h5>
+            </label>
+            <input type="text" required class="form-control form-control-lg" id="sombra.altura" name="sombra.altura"
+                value={{sombra.altura}} placeholder="Digite a altura do obstáculo">
+
+        </div>
+
+
+        <div class="row">
+
+            <div class="col-6 align-items-center">
+
+                <button id="submit" type="submit" type="button" class="btn btn-primary btn-center">Cadastrar</button>
+
+            </div>
+
+        </div>
+
+    </form>
+
+
+    <br>
+    <hr>
+
+    <div class="row">
+        <div class="col-12">Elevação: {{ elevacao }}</div>
+        <div class="col-12">Azimute: {{azimute}}</div>
+        <div class="col-12">Comprimento da sombra: {{ sombra.comprimento }}</div>
+        <div class="col-12">Direção da sombra: {{sombra.direcao}}</div>
+    </div>
+
+</div>
+
+</body>
+
+</html>

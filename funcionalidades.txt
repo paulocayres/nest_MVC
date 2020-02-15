@@ -1,0 +1,8 @@
+1 - CRUD transação financeira.
+2 - CRUD agenda financeira.
+3 - CRUD saldo.
+4 - CRUD categorias financeiras.
+5 - CRUD centro de custos.
+6 - CRUD metas.
+
+

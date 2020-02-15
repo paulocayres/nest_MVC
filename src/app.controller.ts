@@ -8,6 +8,6 @@ export class AppController {
   @Get()
   @Render('index')
   getTeste() {
-    return { message: 'teste'};
+    return '';
   }
 }

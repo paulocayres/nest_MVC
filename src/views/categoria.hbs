@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+{{>head}}
+
+
+
+  <div class="container">
+
+  <form id="categoriaForm" method="post">
+
+    <div class="form-group">
+      <label for="nome">
+        <h5>Categoria:</h5>
+      </label>
+
+      <input type="text" required class="form-control form-control-lg" id="categoria" name="categoria"
+        placeholder="Digite o título da categoria">
+
+        <br>
+
+      <label for="nome">
+        <h5>Descrição:</h5>
+      </label>
+      <input type="text" required class="form-control form-control-lg" id="descricao" name="descricao"
+        placeholder="Digite o descrição da categoria">
+
+    </div>
+
+
+    <div class="row">
+
+      <div class="col-6 align-items-center">
+
+        <button id="submit" type="submit" type="button" class="btn btn-primary btn-center">Cadastrar</button>
+
+      </div>
+
+    </div>
+
+  </form>
+
+  <br>
+  <hr>
+{{#each categoriaArray}}
+<div class="row">
+  <div class="col-1"></div>
+  <div class="col-2">{{ categoria }}</div>
+  <div class="col-9">- &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {{descricao}}</div>
+</div>
+  {{/each}}
+</div>
+
+</body>
+
+</html>
