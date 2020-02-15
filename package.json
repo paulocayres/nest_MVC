@@ -24,7 +24,7 @@
     "@nestjs/mongoose": "^6.1.2",
     "@nestjs/platform-express": "^6.0.0",
     "hbs": "^4.1.0",
-    "mongoose": "^5.6.7",
+    "mongoose": "^5.7.5",
     "node-sass-middleware": "^0.11.0",
     "reflect-metadata": "^0.1.12",
     "rimraf": "^2.6.2",
