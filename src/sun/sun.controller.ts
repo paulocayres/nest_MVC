@@ -17,15 +17,15 @@ export class SunController {
     @Get()
     @Render('sun')
     async getSun(): Promise<object> {
-        const sun = await this.sunService.getSunPosition();
-        return sun;
+        return null;
     }
 
 
     @Post()
     @Render('sun')
     async postSun(@Body() sunInput: SunInputDto): Promise<object> {
-        return await this.sunService.postSunPosition(sunInput);
+        return {sunArray: await this.sunService.getSunPositions(sunInput)};
+        // return await this.sunService.getSunPositions(sunInput);
     }
 
 

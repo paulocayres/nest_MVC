@@ -4,20 +4,27 @@
 
 
 
-<div class="container">
+<div class="container-fluid">
 
     <form id="sunForm" method="post">
 
         <div class="form-group">
 
-
-
-            <label for="data">
+            <label for="dataini">
                 <h5>Data/Hora:</h5>
             </label>
 
-            <input type="datetime" required class="form-control form-control-lg" id="data" name="data" size="50"
-                placeholder="Digite a data e hora no formato: 2020-02-15T05:11:40.335Z">
+            <input type="datetime" required class="form-control form-control-lg" id="dataini" name="dataini" size="50"
+                placeholder="Digite a data e hora inicial no formato: 2020-02-15T05:11:40.335Z">
+
+            <br>
+
+            <label for="datafim">
+                <h5>Data/Hora:</h5>
+            </label>
+
+            <input type="datetime" required class="form-control form-control-lg" id="datafim" name="datafim" size="50"
+                placeholder="Digite a data e hora final no formato: 2020-02-15T05:11:40.335Z">
 
             <br>
 
@@ -25,20 +32,20 @@
                 <h5>Latitude:</h5>
             </label>
             <input type="text" required class="form-control form-control-lg" id="latitude" name="latitude"
-                value={{latitude}} placeholder="Digite a latitude">
+                placeholder="Digite a latitude">
             <br>
 
             <label for="logitude">
                 <h5>Longitude:</h5>
             </label>
             <input type="text" required class="form-control form-control-lg" id="longitude" name="longitude"
-                value={{longitude}} placeholder="Digite a longitude">
+                placeholder="Digite a longitude">
 
-            <label for="sombra.altura">
+            <label for="sAltura">
                 <h5>Altura do obstáculo:</h5>
             </label>
-            <input type="text" required class="form-control form-control-lg" id="sombra.altura" name="sombra.altura"
-                value={{sombra.altura}} placeholder="Digite a altura do obstáculo">
+            <input type="text" required class="form-control form-control-lg" id="sAltura" name="sAltura"
+                placeholder="Digite a altura do obstáculo">
 
         </div>
 
@@ -59,12 +66,34 @@
     <br>
     <hr>
 
-    <div class="row">
-        <div class="col-12">Elevação: {{ elevacao }}</div>
-        <div class="col-12">Azimute: {{azimute}}</div>
-        <div class="col-12">Comprimento da sombra: {{ sombra.comprimento }}</div>
-        <div class="col-12">Direção da sombra: {{sombra.direcao}}</div>
+    <div class="row" style="font-size: 14px;">
+        <table>
+            <tr>
+                <td>Momento</td>
+                <td>Elevação</td>
+                <td>Azimute</td>
+                <td>Comprimento da sombra</td>
+                <td>Direção da sombra</td>
+            </tr>
+            {{#each sunArray}}
+            <tr>
+                <td>{{ time }}</td>
+                <td>{{ elevacao }}</td>
+                <td>{{azimute}}</td>
+                <td>{{ sComprimento }}</td>
+                <td>{{sDirecao}}</td>
+            </tr>
+            {{/each}}
+        </table>
+        {{!--         <div class="col">Momento: {{ time }}</div>
+        <div class="col">Elevação: {{ elevacao }}</div>
+        <div class="col">Azimute: {{azimute}}</div>
+        <div class="col">Comprimento da sombra: {{ sComprimento }}</div>
+        <div class="col">Direção da sombra: {{sDirecao}}</div> --}}
     </div>
+
+
+    <br><br><br><br><br>
 
 </div>
 

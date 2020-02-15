@@ -9,55 +9,63 @@ import * as Sun from 'suncalc';
 export class SunService {
     constructor(
         @InjectModel('SunInput') private readonly sunModel: Model<SunInput>,
-    ) {}
+    ) { }
 
-    async getSunPosition(): Promise < SunInput > {
+    async getSunPosition(sunInput: SunInputDto): Promise<SunInput> {
 
-        const times: Date = new Date();
-        const sun = Sun.getPosition(times, -47, -15);
-        const azimute = (sun.azimuth * 180 / Math.PI).toString();
-        const elevacao  = (sun.altitude * 180 / Math.PI).toString();
-        const latitude = (51.5).toString();
-        const longitude = (-0.1).toString();
-        const data = times.getDay().toString() + '/' + times.getMonth().toString() + '/' + times.getFullYear().toString() + ' '
-        + times.getHours().toString() + ':' + times.getMinutes().toString();
-        Logger.log('Data: ' + data);
-        let direc = 180 + parseFloat(azimute);
-        if (direc >= 360) {
-            direc = direc - 360;
-        }
-        const sombra = {
-            direcao: direc.toString(),
-            comprimento:  elevacao,
-            altura: '5',
-        };
- 
-        return {data, latitude, longitude, azimute, elevacao, sombra};
-
-    }
-
-    async postSunPosition(sunInput: SunInputDto): Promise < SunInput > {
-
-        const times: Date = new Date(sunInput.data);
+        const dataini = new Date(sunInput.dataini).toString();
+        const datafim = new Date(sunInput.datafim).toString();
+        const times = new Date(sunInput.dataini).toString();
+        const time = times;
         const lati: any = sunInput.latitude;
         const longi: any = sunInput.longitude;
         const latitude = sunInput.latitude;
         const longitude = sunInput.longitude;
         const sun = Sun.getPosition(times, lati, longi);
         const azimute = ((sun.azimuth * 180 / Math.PI) + 180).toString();
-        const elevacao  = (sun.altitude * 180 / Math.PI).toString();
-        const data = times.getDay().toString() + '/' + times.getMonth().toString() + '/' + times.getFullYear().toString() + ' '
-        + times.getHours().toString() + ':' + times.getMinutes().toString();
-        Logger.log('Data: ' + data);
-        let direc = 180 + parseFloat(azimute);
-        if (direc >= 360) {
-            direc = direc - 360;
-        }
-        const sombra = {
-            direcao: direc.toString(),
-            comprimento:  elevacao,
-            altura: sunInput.sombra.altura,
-        };
-        return {data, latitude, longitude, azimute, elevacao, sombra};
+        const elevacao = (sun.altitude * 180 / Math.PI).toString();
+        const direc = azimute;
+        const sAltura = sunInput.sAltura;
+        const comp = parseFloat(sAltura) / Math.tan(parseFloat(sun.altitude));
+        const sDirecao = direc.toString();
+        const sComprimento = comp.toString();
+
+        return { dataini, datafim, time,  latitude, longitude, azimute, elevacao, sComprimento, sDirecao, sAltura };
     }
+
+    async getSunPositions(sunInput: SunInputDto): Promise<SunInput[]> {
+
+        const dataini = new Date(sunInput.dataini).toString();
+        const times = new Date(sunInput.dataini);
+        const dtf = new Date(sunInput.datafim);
+        const datafim = new Date(sunInput.datafim).toString();
+        const lati: any = sunInput.latitude;
+        const longi: any = sunInput.longitude;
+        const latitude = sunInput.latitude;
+        const longitude = sunInput.longitude;
+        const sAltura = sunInput.sAltura;
+
+        const positions: SunInput[] = [];
+
+
+        while (times < dtf) {
+            const sun = Sun.getPosition(times, lati, longi);
+            const azimute = ((sun.azimuth * 180 / Math.PI) + 180).toString().replace('.', ',');
+            const elevacao = (sun.altitude * 180 / Math.PI).toString().replace('.', ',');
+            const elev = (sun.altitude * 180 / Math.PI);
+            if (elev > 30) {
+                const comp = parseFloat(sAltura) / Math.tan(parseFloat(sun.altitude));
+                const sDirecao = azimute.replace('.', ',');
+                const sComprimento = comp.toString().replace('.', ',');
+                const time = times.toString();
+                positions.push({ dataini, datafim, time, latitude, longitude, azimute, elevacao, sComprimento, sDirecao, sAltura });
+            }
+            times.setHours(times.getHours() + 1);
+
+        }
+
+
+        return positions;
+    }
+
 }
