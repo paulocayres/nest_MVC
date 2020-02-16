@@ -4,48 +4,78 @@
 
 
 
-<div class="container-fluid">
+<div class="container">
 
     <form id="sunForm" method="post">
 
         <div class="form-group">
 
-            <label for="dataini">
-                <h5>Data/Hora:</h5>
-            </label>
+            <div class="row">
 
-            <input type="datetime" required class="form-control form-control-lg" id="dataini" name="dataini" size="50"
-                placeholder="Digite a data e hora inicial no formato: 2020-02-15T05:11:40.335Z">
+                <div class="col-6">
+                    <label for="dataini">
+                        <h5>Data/Hora inicial:</h5>
+                    </label>
 
-            <br>
+                    <input type="datetime" required class="form-control form-control-lg" id="dataini" name="dataini"
+                        placeholder="Digite no formato: dd/mm/aaaa hh:mm:ss">
+                </div>
+                <div class="col-6">
+                    <label for="datafim">
+                        <h5>Data/Hora final:</h5>
+                    </label>
 
-            <label for="datafim">
-                <h5>Data/Hora:</h5>
-            </label>
+                    <input type="datetime" required class="form-control form-control-lg" id="datafim" name="datafim"
+                        placeholder="Digite  no formato: dd/mm/aaaa hh:mm:ss">
+                </div>
+            </div>
 
-            <input type="datetime" required class="form-control form-control-lg" id="datafim" name="datafim" size="50"
-                placeholder="Digite a data e hora final no formato: 2020-02-15T05:11:40.335Z">
 
-            <br>
+            <div class="row">
+                <div class="col-6">
+                    <label for="latitude">
+                        <h5>Latitude:</h5>
+                    </label>
+                    <input type="text" required class="form-control form-control-lg" id="latitude" name="latitude"
+                        placeholder="Digite a latitude">
+                </div>
+                <div class="col-6">
 
-            <label for="latitude">
-                <h5>Latitude:</h5>
-            </label>
-            <input type="text" required class="form-control form-control-lg" id="latitude" name="latitude"
-                placeholder="Digite a latitude">
-            <br>
+                    <label for="logitude">
+                        <h5>Longitude:</h5>
+                    </label>
+                    <input type="text" required class="form-control form-control-lg" id="longitude" name="longitude"
+                        placeholder="Digite a longitude">
+                </div>
+            </div>
 
-            <label for="logitude">
-                <h5>Longitude:</h5>
-            </label>
-            <input type="text" required class="form-control form-control-lg" id="longitude" name="longitude"
-                placeholder="Digite a longitude">
+            <div class="row">
+                <div class="col-4">
+                    <label for="sAltura">
+                        <h5>Altura do obstáculo:</h5>
+                    </label>
+                    <input type="text" required class="form-control form-control-lg" id="sAltura" name="sAltura"
+                        placeholder="Digite a altura do obstáculo">
+                </div>
+                <div class="col-4">
+                    <label for="limElev">
+                        <h5>Elevação mínima solar:</h5>
+                    </label>
+                    <input type="text" required class="form-control form-control-lg" id="limElev" name="limElev"
+                        placeholder="Digite a menor elevação a ser considerada">
+                </div>
+                                <div class="col-4">
+                    <label for="passo">
+                        <h5>Passo:</h5>
+                    </label>
+                    <input type="text" required class="form-control form-control-lg" id="passo" name="passo"
+                        placeholder="Digite o passo em minutos para amostragem">
+                </div>
+            </div>
 
-            <label for="sAltura">
-                <h5>Altura do obstáculo:</h5>
-            </label>
-            <input type="text" required class="form-control form-control-lg" id="sAltura" name="sAltura"
-                placeholder="Digite a altura do obstáculo">
+
+
+
 
         </div>
 
@@ -54,7 +84,7 @@
 
             <div class="col-6 align-items-center">
 
-                <button id="submit" type="submit" type="button" class="btn btn-primary btn-center">Cadastrar</button>
+                <button id="submit" type="submit" type="button" class="btn btn-primary btn-center">Executar</button>
 
             </div>
 
@@ -66,17 +96,22 @@
     <br>
     <hr>
 
-    <div class="row" style="font-size: 14px;">
-        <table>
+
+    <table class="table">
+        <thead>
             <tr>
-                <td>Momento</td>
-                <td>Elevação</td>
-                <td>Azimute</td>
-                <td>Comprimento da sombra</td>
-                <td>Direção da sombra</td>
+                <th>#</th>
+                <th>Momento</th>
+                <th>Elevação</th>
+                <th>Azimute</th>
+                <th>Comprimento da sombra</th>
+                <th>Direção da sombra</th>
             </tr>
+        </thead>
+        <tbody>
             {{#each sunArray}}
             <tr>
+                <th scope="row">{{@index}}</th>
                 <td>{{ time }}</td>
                 <td>{{ elevacao }}</td>
                 <td>{{azimute}}</td>
@@ -84,17 +119,10 @@
                 <td>{{sDirecao}}</td>
             </tr>
             {{/each}}
-        </table>
-        {{!--         <div class="col">Momento: {{ time }}</div>
-        <div class="col">Elevação: {{ elevacao }}</div>
-        <div class="col">Azimute: {{azimute}}</div>
-        <div class="col">Comprimento da sombra: {{ sComprimento }}</div>
-        <div class="col">Direção da sombra: {{sDirecao}}</div> --}}
-    </div>
-
+        </tbody>
+    </table>
 
     <br><br><br><br><br>
-
 </div>
 
 </body>

@@ -29,8 +29,10 @@ export class SunService {
         const comp = parseFloat(sAltura) / Math.tan(parseFloat(sun.altitude));
         const sDirecao = direc.toString();
         const sComprimento = comp.toString();
+        const limElev = sunInput.limElev;
 
-        return { dataini, datafim, time,  latitude, longitude, azimute, elevacao, sComprimento, sDirecao, sAltura };
+        return;
+        // return { dataini, datafim, time,  latitude, longitude, azimute, elevacao, sComprimento, sDirecao, sAltura, limElev };
     }
 
     async getSunPositions(sunInput: SunInputDto): Promise<SunInput[]> {
@@ -44,26 +46,34 @@ export class SunService {
         const latitude = sunInput.latitude;
         const longitude = sunInput.longitude;
         const sAltura = sunInput.sAltura;
+        const limElev = sunInput.limElev;
+        const passo = sunInput.passo;
 
         const positions: SunInput[] = [];
 
 
         while (times < dtf) {
             const sun = Sun.getPosition(times, lati, longi);
-            const azimute = ((sun.azimuth * 180 / Math.PI) + 180).toString().replace('.', ',');
-            const elevacao = (sun.altitude * 180 / Math.PI).toString().replace('.', ',');
-            const elev = (sun.altitude * 180 / Math.PI);
-            if (elev > 30) {
-                const comp = parseFloat(sAltura) / Math.tan(parseFloat(sun.altitude));
-                const sDirecao = azimute.replace('.', ',');
-                const sComprimento = comp.toString().replace('.', ',');
-                const time = times.toString();
-                positions.push({ dataini, datafim, time, latitude, longitude, azimute, elevacao, sComprimento, sDirecao, sAltura });
+            const nAzimute = ((sun.azimuth * 180 / Math.PI)) + 180;
+            let dir =  nAzimute + 180;
+            if (dir > 360) {
+                dir = dir - 360;
             }
-            times.setHours(times.getHours() + 1);
+            dir = (Math.round(dir * 100) / 100);
+            const azimute =  (Math.round(nAzimute * 100) / 100).toString().replace('.', ',');
+            const nElevacao = (sun.altitude * 180 / Math.PI);
+            const elevacao = (Math.round(nElevacao * 100) / 100).toString().replace('.', ',');
+            const elev = (sun.altitude * 180 / Math.PI);
+            if (times.getHours() > 6 && times.getHours() < 20 && elev > parseFloat(limElev)) {
+                const comp = parseFloat(sAltura) / Math.tan(parseFloat(sun.altitude));
+                const sDirecao = dir.toString().replace('.', ',');
+                const sComprimento = (Math.round(comp * 100) / 100).toString().replace('.', ',');
+                const time = times.toString();
+                positions.push({ dataini, datafim, time, latitude, longitude, azimute, elevacao, sComprimento, sDirecao, sAltura, limElev, passo });
+            }
+            times.setMinutes(times.getMinutes() + parseFloat(passo));
 
         }
-
 
         return positions;
     }

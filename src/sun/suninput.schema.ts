@@ -11,4 +11,6 @@ export const SunInputSchema = new mongoose.Schema({
     sComprimento: String,
     sDirecao: String,
     sAltura: String,
+    limElev: String,
+    passo: String,
 });

@@ -11,4 +11,6 @@ export interface SunInput extends Document {
     readonly sComprimento: string;
     readonly sDirecao: string;
     readonly sAltura: string;
+    readonly limElev: string;
+    readonly passo: string;
 }

@@ -9,4 +9,6 @@ export class SunInputDto {
     readonly sComprimento: string;
     readonly sDirecao: string;
     readonly sAltura: string;
+    readonly limElev: string;
+    readonly passo: string;
 }
