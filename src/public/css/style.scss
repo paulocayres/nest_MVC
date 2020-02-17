@@ -4,27 +4,10 @@ p {
     color: $main-color;
 }
 
-.myClass {
-	font-size: 2em;
-	height: 66.8125px !important;
+input::placeholder {
+	font-size: 0.8em;
+	font-style: italic;
   }
-  
-  .myClass::-webkit-input-placeholder { /* WebKit browsers */
-	font-size: 1em;
-  }
-  
-  .myClass:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
-	font-size: 1em;
-  }
-  
-  .myClass::-moz-placeholder { /* Mozilla Firefox 19+ */
-	font-size: 1em;
-  }
-  
-  .myClass:-ms-input-placeholder { /* Internet Explorer 10+ */
-	font-size: 1em;
-  }
-
 /* #faixa {
     padding-top: 15px;
     padding-right: 10px;

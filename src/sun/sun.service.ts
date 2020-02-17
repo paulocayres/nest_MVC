@@ -35,7 +35,7 @@ export class SunService {
         // return { dataini, datafim, time,  latitude, longitude, azimute, elevacao, sComprimento, sDirecao, sAltura, limElev };
     }
 
-    async getSunPositions(sunInput: SunInputDto): Promise<SunInput[]> {
+    async getSunPositions(sunInput: SunInputDto): Promise<SunInput> {
 
         const dataini = new Date(sunInput.dataini).toString();
         const times = new Date(sunInput.dataini);
@@ -48,6 +48,7 @@ export class SunService {
         const sAltura = sunInput.sAltura;
         const limElev = sunInput.limElev;
         const passo = sunInput.passo;
+        
 
         const positions: SunInput[] = [];
 
@@ -60,22 +61,26 @@ export class SunService {
                 dir = dir - 360;
             }
             dir = (Math.round(dir * 100) / 100);
-            const azimute =  (Math.round(nAzimute * 100) / 100).toString().replace('.', ',');
+            const azimute =  (Math.round(nAzimute * 100) / 100).toString();
             const nElevacao = (sun.altitude * 180 / Math.PI);
-            const elevacao = (Math.round(nElevacao * 100) / 100).toString().replace('.', ',');
+            const elevacao = (Math.round(nElevacao * 100) / 100).toString();
             const elev = (sun.altitude * 180 / Math.PI);
             if (times.getHours() > 6 && times.getHours() < 20 && elev > parseFloat(limElev)) {
                 const comp = parseFloat(sAltura) / Math.tan(parseFloat(sun.altitude));
-                const sDirecao = dir.toString().replace('.', ',');
-                const sComprimento = (Math.round(comp * 100) / 100).toString().replace('.', ',');
+                const sDirecao = dir.toString();
+                const sComprimento = (Math.round(comp * 100) / 100).toString();
                 const time = times.toString();
-                positions.push({ dataini, datafim, time, latitude, longitude, azimute, elevacao, sComprimento, sDirecao, sAltura, limElev, passo });
+                // positions.push({ dataini, datafim, time, latitude, longitude, azimute, elevacao,_
+                // sComprimento, sDirecao, sAltura, limElev, passo });
+                sunInput = { dataini, datafim, time, latitude, longitude, azimute, elevacao, sComprimento, sDirecao, sAltura, limElev, passo };
+                const createdSun = this.sunModel(sunInput);
+                createdSun.save();
             }
             times.setMinutes(times.getMinutes() + parseFloat(passo));
 
         }
 
-        return positions;
+        return sunInput;
     }
 
 }

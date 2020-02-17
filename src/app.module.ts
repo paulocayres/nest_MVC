@@ -6,7 +6,7 @@ import { CategoriaModule } from './categoria/categoria.module';
 import { SunModule } from './sun/sun.module';
 
 @Module({
-  imports: [MongooseModule.forRoot('mongodb://paulo.cayres:pccr0976@ds255917.mlab.com:55917/nest_mvc'), CategoriaModule, SunModule],
+  imports: [MongooseModule.forRoot('mongodb://paulo.cayres:pccr0976@ds263078.mlab.com:63078/imperium'), CategoriaModule, SunModule],
   controllers: [AppController],
   providers: [AppService],
 })
