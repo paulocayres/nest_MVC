@@ -13,4 +13,6 @@ export interface SunInput extends Document {
     readonly sAltura: string;
     readonly limElev: string;
     readonly passo: string;
+    readonly horaini: string;
+    readonly horafim: string;
 }
